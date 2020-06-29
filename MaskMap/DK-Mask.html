@@ -30,8 +30,9 @@
 
             $.ajax({
                 type: 'Get',
-                url: 'https://findmasks.herokuapp.com/places',
+                url: 'https://raw.githubusercontent.com/kai6-6-6/JavaScript-Exercise/master/MaskMap/MAP.json?token=AORVZWNGFKXY7JRZJLRNHW267I5YE',
                 success: function (response) {
+                    console.log('OK');
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: { lat: 24.9981058, lng: 121.0896592 },
                         zoom: 13
@@ -47,6 +48,10 @@
             var Station = [];
             var marker=[];
             var infowindow=[];
+            // Mask.features.forEach(element => {
+    
+            // });
+
             Mask.features.forEach(element => {
                 var Lat = element.geometry.coordinates[1];
                 var Lng = element.geometry.coordinates[0];
