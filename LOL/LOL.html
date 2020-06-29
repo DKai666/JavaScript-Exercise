@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>LOL</title>
+    <script src="https://kit.fontawesome.com/175ffa51f2.js" crossorigin="anonymous"></script>
+    <style>
+        
+        .container {
+            margin: auto;
+        }
+
+        .card {
+            position: relative;
+        }
+
+        .card-body {
+            position: absolute;
+            bottom: 0;
+            height: 15%;
+            padding: 0px;
+        }
+
+        #Btn_p {
+            border: none;
+            background-color: rgba(0, 0, 26, 0.87);
+            color: white;
+            font-weight: 900;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <template id="template">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <a id='A' href="">
+                            <img id='IMG' src="" class="card-img-top d-block w-100">
+                        </a>
+                        <div class="card-body w-100">
+                            <button id='Btn_p'class="card-text w-100 h-100" type="button" data-toggle="modal" data-target="#exampleModal"></button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        window.onload = function () {
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+
+                var lol = JSON.parse(this.responseText);
+                // debugger;
+                lol.forEach(element => {
+                    let Row = document.querySelector('.row');
+                    let Template = document.getElementById('template');
+                    let cloneContent = Template.content.cloneNode(true);
+                    let A = cloneContent.getElementById('A');
+                    let Name = element.name;
+                    let IMG = cloneContent.getElementById('IMG');
+                    let Btn_p = cloneContent.getElementById('Btn_p');
+                    IMG.setAttribute('src', element.icon);
+                    Btn_p.innerHTML = element.name;
+                    A.setAttribute('href', element.link.url);
+                    Row.appendChild(cloneContent);
+
+                    Btn_p.addEventListener('click', function () {
+                        let modalTitle = document.getElementsByClassName('modal-title')[0];
+                        let modalBody = document.getElementsByClassName('modal-body')[0];
+                        modalTitle.textContent = element.name;
+                        modalBody.innerHTML =`生命:${element.stats.hp}<br>升級提升生命:${element.stats.hpperlevel}<br>魔力:${element.stats.mp}<br>升級提升魔力:${element.stats.mpperlevel}<br>移動速度:${element.stats.movespeed}<br>物理防禦:${element.stats.armor}<br>升級提升物理防禦:${element.stats.armorperlevel}<br>魔法防禦:${element.stats.spellblock}<br>升級提升魔法防禦:${element.stats.spellblockperlevel}<br>攻擊距離:${element.stats.attackrange}<br>生命恢復:${element.stats.hpregen}<br>升級提升生命恢復:${element.stats.hpregenperlevel}<br>魔力恢復:${element.stats.mpregen}<br>升級提升魔力恢復:${element.stats.mpregenperlevel}<br>物理攻擊:${element.stats.attackdamage}<br>升級提升物理攻擊:${element.stats.attackdamageperlevel}<br>攻擊速度:${element.stats.attackspeedoffset}<br>升級提升攻擊速度:${element.stats.attackspeedperlevel}`;
+                    });
+                });
+            }
+            xhr.open("GET", "https://raw.githubusercontent.com/kai6-6-6/Exercise/master/LOL/LOL.js");
+            xhr.send();
+        }
+    </script>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

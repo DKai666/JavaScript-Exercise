@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-sc   ale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<h1>Taiwan Address/Zip code</h1>
+<template id='template'>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</template>
+
+<body>
+
+    <script>
+        let body = document.querySelector('body');
+        let table = document.createElement('table');
+        table.setAttribute("border", "2");
+        let tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+        body.appendChild(table);
+
+
+
+        window.onload = function () {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                    zipcodeArray = JSON.parse(this.responseText);
+
+                    var Zipcode = [];
+                    zipcodeArray.forEach((item, index) => {
+                        let _districts = [];
+                        let _city = item.CityName;
+                        item.AreaList.forEach((item, index) => {
+                            _districts.push({ District: item.AreaName, ZipCode: item.ZipCode });
+                        });
+
+
+                        let _cityobject = ({ City: _city, Districts: _districts });
+                        Zipcode.push(_cityobject);
+                    });
+
+                    Zipcode[0].Districts.forEach((item) => {
+                        getAddress(Zipcode[0].City,item.District, item.ZipCode)
+
+                    });
+
+
+
+                }
+                else {
+                    msg.textContent = '發生錯誤' + xhr.status;
+                }
+
+            }
+            xhr.open('GET', 'https://raw.githubusercontent.com/kai6-6-6/Exercise/master/TaiwanAddress/AllData.json');
+            xhr.send();
+
+        }
+        function getAddress(x,y,z) {
+            let Template = document.getElementById('template');
+            let cloneContent = Template.content.cloneNode(true);
+            let tds = cloneContent.querySelectorAll('td');
+            tds[0].innerHTML = x;
+            tds[1].innerHTML = y;
+            tds[2].innerHTML = z;
+            tbody.appendChild(cloneContent);
+        }
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

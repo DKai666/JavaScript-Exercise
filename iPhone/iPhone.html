@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>IPhone11</title>
+    <link rel="stylesheet" href="RESET.css">
+    <script src="https://kit.fontawesome.com/175ffa51f2.js" crossorigin="anonymous"></script>
+    <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    h3 {
+      margin-top: 10%;
+      width: 100%;
+      font-size: 15px;
+    }
+    .btn-color .btn {
+      position: relative;
+      padding-top: 70px;
+      width: 45%;
+      margin: 2% 2%;
+      border: 1px solid rgba(146, 146, 146, 0.3);
+      box-sizing: border-box;
+    }
+    .btn-color .btn:hover{
+        border: 1px solid rgba(0, 0, 0, 0.479);
+    }
+    .btn-color .btn::after {
+      content: '';
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(168, 163, 163, 0.3);
+      border-radius: 50%;
+      position: absolute;
+      top: 20%;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .btn-color .btn:nth-child(2)::after {
+      background-color: #a0a0a0;
+    }
+
+    .btn-color .btn:nth-child(3)::after {
+      background-color: rgb(218, 218, 218);  
+    }
+
+    .btn-color .btn:nth-child(4)::after {
+      background-color: #556B2F;
+    }
+
+    .btn-color .btn:nth-child(5)::after {
+      background-color: rgb(240, 197, 148);
+    }
+    .btn-storage{
+        margin-left: 5%;
+    }
+    .btn-storage .btn {
+      padding: 20px;
+      width: 40%;
+      margin: 2% 2%;
+      border: 1px solid rgba(146, 146, 146, 0.3);
+      box-sizing: border-box;
+      font-size: 24px;
+    }
+    .btn-storage .btn:hover{
+        border: 1px solid rgba(0, 0, 0, 0.479);
+    }
+    .info{
+        padding-top: 3%;
+        padding-left:9%;
+    }
+    .info a{
+        width: 200px;
+        color: white;
+    }
+        
+    </style>
+  </head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-6 pic">
+            <div class="pic-iphone11">
+              <img id='MainPic' src="iphone-11-pro.png" alt="" class="w-100 d-block">
+            </div>
+          </div>
+          <div class="col-6 d-flex flex-column justify-content-around" id="btn-infor">
+            <div class="btn-color h-100 d-flex flex-wrap justify-content-center">
+              <div class="buy-iphone11">
+                <h1 class="">購買 iPhone 11 Pro</h1>
+              </div>
+              <div class="group d-flex flex-wrap">
+                <h3 class="w-100 d-block">選擇外觀。</h3>
+                <button id='gray' class="btn">太空灰色</button>
+                <button id='silver' class="btn">銀色</button>
+                <button id='green' class="btn">夜幕綠色</button>
+                <button id='gold' class="btn">金色</button>
+              </div>
+            </div>
+            <div class="btn-storage h-100 d-flex flex-wrap justify-content-center">
+              <div class="group d-flex flex-wrap">
+                <h3 class="w-100 d-block">選擇儲存容量。</h3><br>
+                <button id='64g' class="btn">64GB</button>
+                <button id='256g' class="btn">256GB</button>
+                <button id='512g' class="btn">512GB</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-6 info text-left pr-5"></div>
+          <div class="col-6 info text-left pr-5">
+            <h2 id="price">$ 35900</h2>
+            <a href="" class="btn border bg-primary" desabled>加入購物袋</a>
+          </div>
+        </div>
+      </div>
+
+
+<script>
+    var Products={
+        IPhone11:{
+            AllColor:[
+                {color:'太空灰色',url:'iphone-11-Gray.png'},
+                {color:'銀色',url:'iphone-11-Silver.png'},
+                {color:'夜幕綠色',url:'iphone-11-Green.png'},
+                {color:'金色',url:'iphone-11-Gold.png'},
+            ],
+            AllStoragre:[
+                {storage:'64GB',price:'NT$35900'},
+                {storage:'256GB',price:'NT$41400'},
+                {storage:'512GB',price:'NT$48400'}
+            ]
+        },
+    }
+    var colorGray=document.getElementById('gray');
+    var colorSilver=document.getElementById('silver');
+    var colorGreen=document.getElementById('green');
+    var colorGold=document.getElementById('gold');
+    var GB64=document.getElementById('64g');
+    var GB256=document.getElementById('256g');
+    var GB512=document.getElementById('512g');
+
+    colorGray.onclick=ChangeColor;
+    colorSilver.onclick=ChangeColor;
+    colorGreen.onclick=ChangeColor;
+    colorGold.onclick=ChangeColor;
+    GB64.onclick=ChangeStorage;
+    GB256.onclick=ChangeStorage;
+    GB512.onclick=ChangeStorage;
+
+    function ChangeColor(){
+        let pic=document.getElementById('MainPic');
+        pic.setAttribute('src', ColorURL(this.innerHTML));
+    }
+    function ColorURL(x){
+        let backcolor;
+        Products.IPhone11.AllColor.forEach(element => {
+            if(element.color==x){backcolor=element.url}
+        });
+        return backcolor;
+    }
+
+    function ChangeStorage(){
+        let Price=document.getElementById('price');
+        Price.innerHTML=GetPrice(this.innerHTML);
+    }
+    function GetPrice(x){
+        let backprice;
+        Products.IPhone11.AllStoragre.forEach(element => {
+            if(element.storage==x){backprice=element.price}
+        });
+        return backprice;
+    }
+
+
+</script>
+    
+
+
+
+
+
+
+
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

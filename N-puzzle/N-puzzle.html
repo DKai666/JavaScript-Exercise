@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            font-size: 30px;
+            margin: 20px;
+        }
+
+        .wrap {
+            position: relative;
+            margin: auto;
+            width: 910px;
+            height: 605px;
+        }
+
+        canvas {
+            margin: -1.5px;
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <label>上傳:<input id='Input' onchange="upload(this)" targetID="preview_progressbarTW_img" type="file"
+            data-target="Input">
+        <button onclick="start()" id='start'>開始</button>
+        <button onclick="reset()">重新開始</button></label>
+    <div class="wrap">
+    </div>
+
+    <script>
+        var all = document.querySelector('div');
+        var pic01 = document.createElement('canvas');
+        var pic02 = document.createElement('canvas');
+        var pic03 = document.createElement('canvas');
+        var pic04 = document.createElement('canvas');
+        var pic05 = document.createElement('canvas');
+        var pic06 = document.createElement('canvas');
+        var pic07 = document.createElement('canvas');
+        var pic08 = document.createElement('canvas');
+        var pic09 = document.createElement('canvas');
+        var picall = [pic01, pic02, pic03, pic04, pic05, pic06, pic07, pic08, pic09];
+        picall.forEach((element, index) => {
+            element.setAttribute('id', `pic${index + 1}`);
+            element.value = 1;
+            pic09.value = 0;
+            element.style.position = 'absolute';
+            all.append(element);
+        });
+        pic01.style.top = '0px';
+        pic01.style.left = '0px';
+        pic02.style.top = '0px';
+        pic02.style.left = '301px';
+        pic03.style.top = '0px';
+        pic03.style.left = '602px';
+        pic04.style.top = '201px';
+        pic04.style.left = '0px';
+        pic05.style.top = '201px';
+        pic05.style.left = '301px';
+        pic06.style.top = '201px';
+        pic06.style.left = '602px';
+        pic07.style.top = '402px';
+        pic07.style.left = '0px';
+        pic08.style.top = '402px';
+        pic08.style.left = '301px';
+        pic09.style.top = '402px';
+        pic09.style.left = '602px';
+
+        var imgx = new Image();
+        function upload(input) {
+            var Inputt = document.getElementById('Input');
+            var reader = new FileReader();
+            Inputt.setAttribute('disabled', 'true');
+            reader.onload = function (e) {
+                console.log(e);
+                var imgx = new Image();
+                imgx.src = e.target.result;
+                imgx.onload = function () {
+            var pic1 = document.getElementById('pic1').getContext('2d');
+            pic1.drawImage(this, 0, 0, 300, 265, 0, 0, 300, 200);
+            var pic2 = document.getElementById('pic2').getContext('2d');
+            pic2.drawImage(this, 300, 0, 300, 265, 0, 0, 300, 200);
+            var pic3 = document.getElementById('pic3').getContext('2d');
+            pic3.drawImage(this, 600, 0, 300, 265, 0, 0, 300, 200);
+            var pic4 = document.getElementById('pic4').getContext('2d');
+            pic4.drawImage(this, 0, 200, 300, 265, 0, 0, 300, 200);
+            var pic5 = document.getElementById('pic5').getContext('2d');
+            pic5.drawImage(this, 300, 200, 300, 265, 0, 0, 300, 200);
+            var pic6 = document.getElementById('pic6').getContext('2d');
+            pic6.drawImage(this, 600, 200, 300, 265, 0, 0, 300, 200);
+            var pic7 = document.getElementById('pic7').getContext('2d');
+            pic7.drawImage(this, 0, 400, 300, 265, 0, 0, 300, 200);
+            var pic8 = document.getElementById('pic8').getContext('2d');
+            pic8.drawImage(this, 300, 400, 300, 265, 0, 0, 300, 200);
+        };
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        var piccat='cat.jpg';
+        imgx.src = piccat;
+        imgx.onload = function () {
+            var pic1 = document.getElementById('pic1').getContext('2d');
+            pic1.drawImage(this, 0, 0, 300, 265, 0, 0, 300, 200);
+            var pic2 = document.getElementById('pic2').getContext('2d');
+            pic2.drawImage(this, 300, 0, 300, 265, 0, 0, 300, 200);
+            var pic3 = document.getElementById('pic3').getContext('2d');
+            pic3.drawImage(this, 600, 0, 300, 265, 0, 0, 300, 200);
+            var pic4 = document.getElementById('pic4').getContext('2d');
+            pic4.drawImage(this, 0, 200, 300, 265, 0, 0, 300, 200);
+            var pic5 = document.getElementById('pic5').getContext('2d');
+            pic5.drawImage(this, 300, 200, 300, 265, 0, 0, 300, 200);
+            var pic6 = document.getElementById('pic6').getContext('2d');
+            pic6.drawImage(this, 600, 200, 300, 265, 0, 0, 300, 200);
+            var pic7 = document.getElementById('pic7').getContext('2d');
+            pic7.drawImage(this, 0, 400, 300, 265, 0, 0, 300, 200);
+            var pic8 = document.getElementById('pic8').getContext('2d');
+            pic8.drawImage(this, 300, 400, 300, 265, 0, 0, 300, 200);
+        };
+        var canvass = document.querySelectorAll('canvas');
+        var aTOP = 0;
+        var aLeft = 0;
+        var white;
+        canvass.forEach(element => {
+            element.addEventListener('click', function () {
+                move(element);
+            })
+        });
+        function move(choose) {
+            let whitey = parseInt((pic9.style.top));
+            let whitex = parseInt((pic9.style.left));
+            let choosey = parseInt((choose.style.top));
+            let choosex = parseInt((choose.style.left));
+            if (((choosex - 301 == whitex || choosex + 301 == whitex) && choosey == whitey) || ((choosey - 201 == whitey || choosey + 201 == whitey) && choosex == whitex)) {
+                aTOP = pic09.style.top;
+                aLeft = pic09.style.left;
+                pic09.style.top = choose.style.top;
+                pic09.style.left = choose.style.left;
+                choose.style.top = aTOP;
+                choose.style.left = aLeft;
+                check()
+            }
+        }
+        function check() {
+            if (
+                pic01.style.top == '0px' &&
+                pic01.style.left == '0px' &&
+                pic02.style.top == '0px' &&
+                pic02.style.left == '301px' &&
+                pic03.style.top == '0px' &&
+                pic03.style.left == '602px' &&
+                pic04.style.top == '201px' &&
+                pic04.style.left == '0px' &&
+                pic05.style.top == '201px' &&
+                pic05.style.left == '301px' &&
+                pic06.style.top == '201px' &&
+                pic06.style.left == '602px' &&
+                pic07.style.top == '402px' &&
+                pic07.style.left == '0px' &&
+                pic08.style.top == '402px' &&
+                pic08.style.left == '301px' &&
+                pic09.style.top == '402px' &&
+                pic09.style.left == '602px'
+            ) { alert('YOU WIN'); }
+        }
+        function reset() {
+            window.location.replace(window.location.href);
+        }
+
+        var timeMove = 50;
+
+        function start() {
+            if (timeMove <= 0) {
+                timeMove = 50;
+                return;
+
+            }
+
+            let changetime = 0;
+            let getrandom;
+            let randompic;
+            let whitey = parseInt((pic9.style.top));
+            let whitex = parseInt((pic9.style.left));
+            let redonpicy;
+            let redonpicx;
+            while (changetime < 1) {
+                getrandom = 'pic' + getRandom(8);
+                randompic = document.getElementById(`${getrandom}`);
+                redonpicy = parseInt((randompic.style.top));
+                redonpicx = parseInt((randompic.style.left));
+                if ((Math.abs(whitex - redonpicx) == 301 && whitey == redonpicy) || (Math.abs(whitey - redonpicy) == 201 && whitex == redonpicx)) {
+                    aTOP = pic09.style.top;
+                    aLeft = pic09.style.left;
+                    pic09.style.top = randompic.style.top;
+                    pic09.style.left = randompic.style.left;
+                    randompic.style.top = aTOP;
+                    randompic.style.left = aLeft;
+                    changetime++;
+                }
+            }
+
+            timeMove--;
+            setTimeout(start, 0);
+        }
+
+        function getRandom(x) { return Math.floor(Math.random() * x) + 1; };
+
+
+
+    </script>
+</body>
+
+</html>

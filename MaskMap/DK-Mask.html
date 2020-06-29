@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DK口罩地圖</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var map;
+        var marker;
+        function initMap() {
+
+            $.ajax({
+                type: 'Get',
+                url: 'https://findmasks.herokuapp.com/places',
+                success: function (response) {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: 24.9981058, lng: 121.0896592 },
+                        zoom: 13
+                    });
+                    GetINfo(response);
+                    alert('07:00–22:59 每 3 分鐘更新一次資料（頻率與健保署系統相同），其餘時段通常不更新。');
+                },
+                error: function (response) { console.log('error') },
+            });
+        }
+        function GetINfo(response) {
+            var Mask = response;
+            var Station = [];
+            var marker=[];
+            var infowindow=[];
+            Mask.features.forEach(element => {
+                var Lat = element.geometry.coordinates[1];
+                var Lng = element.geometry.coordinates[0];
+                var Name = element.properties.name;
+                var AdultMask = element.properties.masksLeft;
+                var ChildMask = element.properties.childMasksLeft;
+                Station.push({ Name: Name, lat: Lat, lng: Lng, AdultMask: AdultMask, ChildMask: ChildMask });
+            });
+
+            Station.forEach((element, index) => {
+                let URLicon;
+                if (element.AdultMask > 0) { URLicon = 'yes.png' }
+                else if (element.AdultMask == 0 && element.ChildMask > 0) { URLicon = 'child.png' }
+                else { URLicon = 'soldout.png' }
+                marker[index] = new google.maps.Marker({
+                    position: { lat: element.lat, lng: element.lng },
+                    map: map,
+                    icon: {
+                        url: URLicon,
+                        scaledSize: new google.maps.Size(80, 80)
+                    },
+                });
+                infowindow[index] = new google.maps.InfoWindow({
+                    content: `${element.Name}
+                    成人口罩:${element.AdultMask} / 兒童口罩:${element.ChildMask}`
+                });
+                // console.log(marker);
+
+                marker[index].addListener('click', function () {
+                    infowindow[index].open(map, marker[index]);
+                });
+
+
+
+
+            });
+
+        }
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-rp4M4Fy43NfGbcrBwzYhJVksLK_EVqg&callback=initMap"
+        async defer></script>
+</body>
+
+
+
+</html>

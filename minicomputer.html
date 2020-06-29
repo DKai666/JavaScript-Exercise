@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+    <link rel="stylesheet" href="RESET.css">
+    <script src="https://kit.fontawesome.com/175ffa51f2.js" crossorigin="anonymous"></script>
+    <style>
+        *{margin: 0;
+        padding: 0;}
+        table{
+            display: flex ;
+            flex-direction: column;
+            background-color: aqua;
+            width: 70%;
+            max-width: 1200px;
+            margin: auto;
+            margin-top: 15px;
+        }
+        thead tr td{
+            width: 1200px;
+            background-color: red;
+        }
+        #mamory{
+            height: 100px;
+            width: 100%;
+            border: 2px solid black;
+            border-bottom: 0;
+            font-size: 60px;
+        }
+        #Input{
+            height: 100px;
+            width: 100%;
+            border: 2px solid black;
+            border-top: 0;
+            font-size: 60px;
+            
+        }
+        table tbody tr{
+            display: flex;
+            justify-content: space-between;
+        }
+        table tbody tr td{
+
+            width: 100px;
+            flex-grow: 1;
+        }
+        table tbody tr td button{
+            width: 100%;
+            height: 100px;
+        }
+        
+    </style>
+  </head>
+  <body>
+    <table>
+        <thead>
+            <tr>
+                <td><input id='mamory' value="" readonly></td>
+            </tr>
+            <tr>
+                <td><input id='Input' value="" readonly></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><button class='number' value="(" id=''>(</button></td>
+                <td><button class='number' value=")" id=''>)</button></td>
+                <td><button value="" onclick="back()"><i class="fas fa-backspace"></i></button></td>
+                <td><button class='number' value="/" id=''><i class="fas fa-divide"></i></button></td>
+            </tr>
+            <tr>
+                <td><button class='number' value="7" id=''>7</button></td>
+                <td><button class='number' value="8" id=''>8</button></td>
+                <td><button class='number' value="9" id=''>9</button></td>
+                <td><button class='number' value="*" id=''>X</button></td>
+            </tr>
+            <tr>
+                <td><button class='number' value="4" id=''>4</button></td>
+                <td><button class='number' value="5" id=''>5</button></td>
+                <td><button class='number' value="6" id=''>6</button></td>
+                <td><button class='number' value="-" id=''>-</button></td>
+            </tr>
+            <tr>
+                <td><button class='number' value="1" id=''>1</button></td>
+                <td><button class='number' value="2" id=''>2</button></td>
+                <td><button class='number' value="3" id=''>3</button></td>
+                <td><button class='number' value="+" id=''>+</button></td>
+            </tr>
+            <tr>
+                <td><button value="" onclick="clearn()">C</button></td>
+                <td><button class='number' value="0" id=''>0</button></td>
+                <td><button class='number' value="." id=''><i class="fas fa-circle"></i></button></td>
+                <td><button value="" id='' onclick="equal(Input.value)"><i class="fas fa-equals"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <script>
+        var Mamory=document.getElementById('mamory');
+        var Input=document.getElementById('Input');
+        var btn=document.querySelectorAll('.number');
+        btn.forEach(element => {
+            element.addEventListener('click',GetNum);
+        });
+        function GetNum(){
+            var num=this.value;
+            Input.value+=num;
+        }
+        function equal(x){
+            Mamory.value=Input.value;
+            var Anser=eval(x);
+            Input.value=Anser;
+        }
+        function clearn(){
+            Mamory.value='';
+            Input.value='';
+        }
+        function back(){
+            let x = Input.value;
+            Input.value = x.substring(0, x.length - 1);
+        }
+        
+
+    </script>
+
+
+
+
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
