@@ -30,7 +30,7 @@
 
             $.ajax({
                 type: 'Get',
-                url: 'https://raw.githubusercontent.com/kai6-6-6/JavaScript-Exercise/master/MaskMap/Mask.json',
+                url: 'https://findmasks.herokuapp.com/places',
                 success: function (response) {
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: { lat: 24.9981058, lng: 121.0896592 },
