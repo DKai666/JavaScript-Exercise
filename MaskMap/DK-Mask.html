@@ -30,9 +30,8 @@
 
             $.ajax({
                 type: 'Get',
-                url: 'MAP.json',
+                url: 'Mask.json',
                 success: function (response) {
-                    console.log('OK');
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: { lat: 24.9981058, lng: 121.0896592 },
                         zoom: 13
