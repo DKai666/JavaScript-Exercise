@@ -30,7 +30,7 @@
 
             $.ajax({
                 type: 'Get',
-                url: 'https://raw.githubusercontent.com/kai6-6-6/JavaScript-Exercise/master/MaskMap/MAP.json?token=AORVZWNGFKXY7JRZJLRNHW267I5YE',
+                url: 'MAP.json',
                 success: function (response) {
                     console.log('OK');
                     map = new google.maps.Map(document.getElementById('map'), {
@@ -48,10 +48,6 @@
             var Station = [];
             var marker=[];
             var infowindow=[];
-            // Mask.features.forEach(element => {
-    
-            // });
-
             Mask.features.forEach(element => {
                 var Lat = element.geometry.coordinates[1];
                 var Lng = element.geometry.coordinates[0];
@@ -86,7 +82,7 @@
             });
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-rp4M4Fy43NfGbcrBwzYhJVksLK_EVqg&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-rp4M4Fy43NfGbcrBwzYhJVksLK_EVqg&libraries=places&callback=initMap"
         async defer></script>
 </body>
 
